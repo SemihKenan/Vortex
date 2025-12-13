@@ -7,6 +7,7 @@ plugins {
     alias(libs.plugins.composeMultiplatform)
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-RC3"
 }
 
 kotlin {
@@ -32,6 +33,7 @@ kotlin {
         androidMain.dependencies {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
+            implementation(libs.ktor.client.okhttp)
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -42,6 +44,14 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
+            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            implementation(libs.ktor.client.core)
+            implementation(libs.ktor.client.content.negotiation)
+            implementation(libs.ktor.serialization.kotlinx.json)
+            implementation(libs.kotlinx.serialization.json)
+            implementation("media.kamel:kamel-image-default:1.0.8")
+            implementation(libs.koin.core)
+            implementation(libs.koin.compose)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)
