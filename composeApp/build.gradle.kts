@@ -1,5 +1,7 @@
 import org.jetbrains.compose.desktop.application.dsl.TargetFormat
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import java.io.FileInputStream
+import java.util.Properties
 
 plugins {
     alias(libs.plugins.kotlinMultiplatform)
@@ -8,15 +10,17 @@ plugins {
     alias(libs.plugins.composeCompiler)
     alias(libs.plugins.composeHotReload)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-RC3"
+    alias(libs.plugins.buildkonfig.plugin)
 }
 
 kotlin {
     androidTarget {
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_11)
+
         }
     }
-    
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -26,9 +30,9 @@ kotlin {
             isStatic = true
         }
     }
-    
+
     jvm()
-    
+
     sourceSets {
         androidMain.dependencies {
             implementation(compose.preview)
@@ -67,12 +71,14 @@ android {
     namespace = "com.vortex.app"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
+
     defaultConfig {
         applicationId = "com.vortex.app"
         minSdk = libs.versions.android.minSdk.get().toInt()
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+
     }
     packaging {
         resources {
@@ -105,3 +111,23 @@ compose.desktop {
         }
     }
 }
+
+buildkonfig {
+    packageName = "com.vortex.app"
+
+    defaultConfigs {
+        val localProperties = Properties()
+        val localPropertiesFile = rootProject.file("local.properties")
+        if (localPropertiesFile.exists()) {
+            localProperties.load(FileInputStream(localPropertiesFile))
+        }
+
+        buildConfigField(
+            com.codingfeline.buildkonfig.compiler.FieldSpec.Type.STRING,
+            "RAWG_KEY",
+            localProperties.getProperty("RAWG_API_KEY") ?: ""
+        )
+    }
+}
+
+
