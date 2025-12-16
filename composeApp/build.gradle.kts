@@ -11,6 +11,7 @@ plugins {
     alias(libs.plugins.composeHotReload)
     id("org.jetbrains.kotlin.plugin.serialization") version "2.3.0-RC3"
     alias(libs.plugins.buildkonfig.plugin)
+    alias(libs.plugins.google.services)
 }
 
 kotlin {
@@ -38,6 +39,7 @@ kotlin {
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation(project.dependencies.platform(libs.firebase.bom))
         }
         commonMain.dependencies {
             implementation(compose.runtime)
@@ -48,14 +50,18 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodelCompose)
             implementation(libs.androidx.lifecycle.runtimeCompose)
-            implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0")
+            implementation(libs.kotlinx.serialization.json)
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
             implementation(libs.kotlinx.serialization.json)
-            implementation("media.kamel:kamel-image-default:1.0.8")
+            implementation(libs.kamel.image.default)
             implementation(libs.koin.core)
             implementation(libs.koin.compose)
+            //Firebase
+            implementation(libs.firebase.auth)
+            implementation(libs.firebase.firestore)
+            implementation(libs.firebase.common)
         }
         commonTest.dependencies {
             implementation(libs.kotlin.test)

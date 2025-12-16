@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "411526753498",
+    "project_id": "vortex-1672b",
+    "storage_bucket": "vortex-1672b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:411526753498:android:35e5fd5a45c1c3187389e3",
+        "android_client_info": {
+          "package_name": "com.vortex.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkGSEXNjbWqfvPw4Fkvm1-kHl5WLCCeok"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
